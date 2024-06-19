@@ -20,7 +20,7 @@ export const sendMessage = async (req, res) => {
         const newMessage = new Message({
             senderId,
             receiverId,
-            message
+            message,
         })
 
         if(newMessage) {
@@ -34,9 +34,9 @@ export const sendMessage = async (req, res) => {
 
         res.status(201).json(newMessage)
 
-    } catch (err) {
-        console.log("Error in sendMessage controller: ", err.mesage)
-        res.status(500).json({err: "Internal server error"})
+    } catch (error) {
+        console.log("Error in sendMessage controller: ", error.mesage)
+        res.status(500).json({error: "Internal server error"})
     }
 }
 
@@ -55,8 +55,8 @@ export const getMessages = async (req, res) => {
 
         res.status(200).json(messages)
 
-    } catch (err) {
-        console.log("Error in getMessages controller: ", err.mesage)
-        res.status(500).json({err: "Internal server error"})
+    } catch (error) {
+        console.log("Error in getMessages controller: ", error.mesage)
+        res.status(500).json({error: "Internal server error"})
     }
 }

@@ -4,7 +4,7 @@ import generateTokenAndSetCookie from '../utils/generateToken.js'
 
 export const signUp = async (req, res) => {
     try {
-        const {fullname, username, password, confirmPassword, gender} = req.body
+        const {fullName, username, password, confirmPassword, gender} = req.body
 
         if(password !== confirmPassword) {
             return res.status(400).json({message: "Passwords don't match"})
@@ -23,7 +23,7 @@ export const signUp = async (req, res) => {
         const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`
 
         const newUser = await User.create({
-            fullname,
+            fullName,
             username,
             password: hashedPassword,
             gender, 
@@ -36,14 +36,14 @@ export const signUp = async (req, res) => {
 
             res.status(201).json({
                 _id: newUser._id,
-                fullname: newUser.fullname,
+                fullName: newUser.fullName,
                 username: newUser.username,
                 profilePic: newUser.profilePic
             })
         } else {
             res.status(400).json({error: "Invalid user data"})
         }
-        
+    
     } catch (error) {
         console.log("Error in signup controller", error.message)
         res.status(500).json({error: "Internal server error"})
@@ -64,12 +64,12 @@ export const login = async (req, res) => {
 
         res.status(200).json({
             _id: user._id,
-            fullnam: user.fullname,
+            fullName: user.fullName,
             username: user.username,
             profilePic: user.profilePic
         })
     } catch (error) {
-        console.log("Error in signup controller", error.message)
+        console.log("Error in login controller", error.message)
         res.status(500).json({error: "Internal server error"})
     }
 }
